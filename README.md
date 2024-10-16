@@ -1,6 +1,5 @@
 # OkkyBoard  
 **EST Oreumi Project_1**  
-**게시판 구현**  
 
 <table>
     <tbody>
@@ -11,7 +10,7 @@
             <td>SDK</td> <td>graalVM 21</td>
         </tr>
         <tr>
-            <td>Project</td> <td>게시판</td>
+            <td>Project</td> <td>게시판 구현</td>
         </tr>
     </tbody>
 </table>
