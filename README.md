@@ -11,7 +11,7 @@
 <table>
     <tbody>
         <tr>
-            <td rowspan="2">이 셀은 두 개의 행을 차지합니다</td>
+            <td>이 셀은 두 개의 행을 차지합니다</td>
             <td>셀 1</td>
         </tr>
         <tr>
