@@ -11,10 +11,13 @@
 <table>
     <tbody>
         <tr>
-            <td linespan="2">언어</td> <td>셀 1</td>
+            <td>언어</td> <td>Java</td>
         </tr>
         <tr>
-            <td>SDK</td> <td>SDK</td>
+            <td>SDK</td> <td>graalVM 21</td>
+        </tr>
+        <tr>
+            <td>Project</td> <td>게시판</td>
         </tr>
     </tbody>
 </table>
