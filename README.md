@@ -11,11 +11,10 @@
 <table>
     <tbody>
         <tr>
-            <td>이 셀은 두 개의 행을 차지합니다</td>
-            <td>셀 1</td>
+            <td linespan="2">언어</td> <td>셀 1</td>
         </tr>
         <tr>
-            <td>셀 2</td>
+            <td>SDK</td> <td>SDK</td>
         </tr>
     </tbody>
 </table>
