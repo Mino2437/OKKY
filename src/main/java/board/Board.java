@@ -32,7 +32,7 @@ public class Board {
     }
     public Board(int num ,String title ,String content ) {
 
-        this.num = num; // 게시판 번호
+        this.num = num; // 게시글 숫
         this.title = title; // 게시판 제목
         this.content = content;  // 게시판 내용
 
@@ -52,7 +52,7 @@ public class Board {
     };
 
     // 1. Create 게시글 작성
-    public void boardCreate() throws InputException {
+    public void boardCreate() {
 
         System.out.print("제목을 입력하세요 > ");
         this.title = inputCmd();
@@ -68,16 +68,18 @@ public class Board {
         boardList.add(this.title); // # 1번
         boardList.add(this.content); // # 2번
 
-        this.num++; // 작성 호출할때마다 게시글 번호 증가
+        this.num++; // 작성 호출할때마다 게시글 증가
+
 
         System.out.println(getNum() + "번 게시물 작성완료..");
         map.put(this.num, boardList);
 //        map.put(this.num, boardList);
 
+
     }
 
     // 2. Read 게시글 조회
-    public void boardRead() throws InputException {
+    public void boardRead() {
 
         System.out.print("어떤 게시물을 조회할까요? ");
         System.out.println("등록된 게시물 번호 : " + map.keySet());
@@ -101,7 +103,7 @@ public class Board {
     }
 
     // 3. Update 게시글 수정
-    public void boardUpdate() throws InputException {
+    public void boardUpdate() {
 
         System.out.print("어떤 게시물을 수정할까요? ");
         System.out.println("등록된 게시물 번호 : " + map.keySet());
@@ -143,27 +145,31 @@ public class Board {
     // 4. Delete, 게시글 삭제
     public void boardDelete() throws InputException {
 
+        try {
         System.out.print("어떤 게시물을 삭제할까요? ");
         System.out.println("등록된 게시물 번호 : " + map.keySet());
         System.out.println("입력 예시 : 게시글번호(1번 또는 1) ");
 
         System.out.print("입력 > ");
-        String[] tmpSplit = inputCmd().split("번");
+        String[] tmpSplit = inputCmd2().split("번");
 
-        Integer key = Integer.parseInt(tmpSplit[0]);
-        // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
+            Integer key = Integer.parseInt(tmpSplit[0]);
+            // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
 
 
-        if(map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
-            System.out.println(key);
-            System.out.println(key + "번 게시물을 삭제합니다..");
+            if (map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
 
-            map.remove(key);
-            System.out.println(key + "번 게시물이 성공적으로 삭제되었습니다..!");
+                System.out.println(key + "번 게시물을 삭제합니다..");
+                this.num--; // 게시글수
+                map.remove(key);
+                System.out.println(key + "번 게시물이 성공적으로 삭제되었습니다..!");
 
-        }
-        else {
-            System.out.println(key + " 번 게시물은 존재하지 않습니다..");
+            } else {
+                System.out.println(key + " 번 게시물은 존재하지 않습니다..");
+            }
+        } catch (InputException IE ) { // 예외 메시지
+            System.out.println(IE.getMessage());
+
         }
 
     }
@@ -176,9 +182,14 @@ public class Board {
     // 6. Category, 게시글 목록
     public void boardCategory() {
 
-        for(int i = 1; i <= this.num; i++) {
-        System.out.println("게시글 번호 : " + i);
-            System.out.println(map.get(i));
+        for(int i = 0; i <= this.num; i++) {
+
+            if(map.containsKey(i)) { // key가 포함되었는지 확인
+
+                System.out.println("게시글 번호 : " + i);
+                System.out.println(map.get(i));
+            }
+
         }
 //        System.out.println(map.values());
 
@@ -207,7 +218,7 @@ public class Board {
         this.content = content;
     }
 
-    public String inputCmd() throws InputException {
+    public String inputCmd() {
 
         String userCmd;
 
@@ -217,5 +228,22 @@ public class Board {
 
         return userCmd;
     }
+
+    public String inputCmd2() throws InputException {
+
+        String userCmd;
+
+        Scanner sc = new Scanner(System.in);
+
+        userCmd = sc.nextLine().trim(); // trim() : 앞 뒤 공백 제거
+        if(userCmd.length() > 2) {
+            InputException IE = new InputException();
+            throw IE;
+        }
+        else {
+            return userCmd;
+        }
+    }
+
 
 }
