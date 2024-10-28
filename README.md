@@ -1,4 +1,4 @@
-# OkkyBoard 예제1  
+# OkkyBoard
 **EST Oreumi Project_1**  
 
 <table>
