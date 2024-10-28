@@ -26,7 +26,7 @@ public class Main {
             // 명령어 조회
             System.out.println(Arrays.toString(cmdArr));
             System.out.print(str);
-            userCmd = inputCmd();
+            userCmd = board.inputCmd();
             // 메모리 누수( obsolete reference ) 생길예정, 계속 확인하기
 
             if (userCmd.equals(cmdArr[0])) { // == "작성" Create
@@ -74,16 +74,5 @@ public class Main {
         }
     }
 
-    public static String inputCmd() {
-
-        String userCmd;
-        Scanner sc = new Scanner(System.in);
-        userCmd = sc.nextLine().trim(); // trim() : 앞 뒤 공백 제거
-
-
-        // 잘못된 입력 ,종료 예외처리 추가 해야됨
-        return userCmd;
-
-    }
 }
 

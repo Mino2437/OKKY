@@ -79,67 +79,73 @@ public class Board {
     }
 
     // 2. Read 게시글 조회
-    public void boardRead() {
+    public void boardRead() throws InputException {
 
-        System.out.print("어떤 게시물을 조회할까요? ");
-        System.out.println("등록된 게시물 번호 : " + map.keySet());
-        System.out.println("입력 예시 : 게시글번호(1번 또는 1) ");
+        try {
+            System.out.print("어떤 게시물을 조회할까요? ");
+            System.out.println("등록된 게시물 번호 : " + map.keySet());
+            System.out.println("입력 예시 : 게시글번호(1번 또는 1) ");
 
-        System.out.print("입력 > ");
-        String[] tmpSplit = inputCmd().split("번");
+            System.out.print("입력 >  ");
+            String[] tmpSplit = inputCmd2().split("번");
 
-        Integer key = Integer.parseInt(tmpSplit[0]);
-        // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
+            Integer key = Integer.parseInt(tmpSplit[0]);
+            // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
 
-        if(map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
+            if (map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
 
-            System.out.println(key + "번 게시물을 조회합니다..");
-            System.out.println(map.get(key));
+                System.out.println(key + "번 게시물을 조회합니다..");
+                System.out.println(map.get(key));
+            } else {
+                System.out.println(key + "번 게시물은 존재하지 않습니다..");
+            }
+
+        } catch (InputException IE ) {
+
         }
-        else {
-            System.out.println(key + "번 게시물은 존재하지 않습니다..");
-        }
-
     }
 
     // 3. Update 게시글 수정
-    public void boardUpdate() {
+    public void boardUpdate() throws InputException {
 
+        try {
         System.out.print("어떤 게시물을 수정할까요? ");
-        System.out.println("등록된 게시물 번호 : " + map.keySet());
-        System.out.println("입력 예시 : 게시글번호(1번 또는 1) ");
+        System.out.println("등록된 게시물 키 : " + map.keySet());
+        System.out.println("입력 예시 : 게시글 키(1번 또는 1) ");
 
         System.out.print("입력 > ");
-        String[] tmpSplit = inputCmd().split("번");
+        String[] tmpSplit = inputCmd2().split("번");
 
         Integer key = Integer.parseInt(tmpSplit[0]);
         // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
 
-        if(map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
+            if(map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
 
-            System.out.println(key + "번 게시물을 수정합니다..");
+                System.out.println(key + "번 게시물을 수정합니다..");
 
-            map.remove(key);
-            ArrayList<String> arrTmp = new ArrayList<String>();
+                map.remove(key);
+                ArrayList<String> arrTmp = new ArrayList<String>();
 
-            System.out.print("제목을 입력하세요 > ");
-            String tmpTitle = inputCmd();
+                System.out.print("제목을 입력하세요 > ");
+             String tmpTitle = inputCmd();
 
-            System.out.print("내용을 입력하세요 > ");
-            String tmpContent = inputCmd();
+                System.out.print("내용을 입력하세요 > ");
+                String tmpContent = inputCmd();
 
-            arrTmp.add(tmpTitle);
-            arrTmp.add(tmpContent);
+                arrTmp.add(tmpTitle);
+                arrTmp.add(tmpContent);
 
-            map.put(key, arrTmp);
+                map.put(key, arrTmp);
 
-            System.out.println(map.get(key));
+                System.out.println(map.get(key));
+
+            }
+            else {
+                System.out.println(key + "번 게시물은 존재하지 않습니다..");
+            }
+        } catch (InputException IE ) {
 
         }
-        else {
-            System.out.println(key + "번 게시물은 존재하지 않습니다..");
-        }
-
     }
 
     // 4. Delete, 게시글 삭제
@@ -147,15 +153,14 @@ public class Board {
 
         try {
         System.out.print("어떤 게시물을 삭제할까요? ");
-        System.out.println("등록된 게시물 번호 : " + map.keySet());
-        System.out.println("입력 예시 : 게시글번호(1번 또는 1) ");
+        System.out.println("등록된 게시물 키 : " + map.keySet());
+        System.out.println("입력 예시 : 게시글 키(1번 또는 1) ");
 
         System.out.print("입력 > ");
         String[] tmpSplit = inputCmd2().split("번");
 
             Integer key = Integer.parseInt(tmpSplit[0]);
             // key값은 primitive 타입은 올수없고, Reference type인 Integer로 정수형을 사용할 수 있다.
-
 
             if (map.containsKey(key)) { // 키값 있는지 확인, boolean 타입 리턴
 
@@ -168,7 +173,7 @@ public class Board {
                 System.out.println(key + " 번 게시물은 존재하지 않습니다..");
             }
         } catch (InputException IE ) { // 예외 메시지
-            System.out.println(IE.getMessage());
+//            System.out.println(IE.getMessage());
 
         }
 
@@ -177,21 +182,21 @@ public class Board {
 
     // 5. Exit, 게시글 종료
     public void boardExit() {
+
         System.out.println(title + "종료");
     }
+
     // 6. Category, 게시글 목록
     public void boardCategory() {
 
-        for(int i = 0; i <= this.num; i++) {
+        int i = 1;
+        for(Integer key : map.keySet()){
 
-            if(map.containsKey(i)) { // key가 포함되었는지 확인
-
-                System.out.println("게시글 번호 : " + i);
-                System.out.println(map.get(i));
-            }
+            System.out.println("게시글 번호 : " + i);
+            System.out.println(map.get(key));
+            i++;
 
         }
-//        System.out.println(map.values());
 
     }
 
