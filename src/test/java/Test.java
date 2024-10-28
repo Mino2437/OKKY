@@ -1,34 +1,21 @@
 import board.Board;
+import exception.InputException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputException {
 
         // 명령어 final로 키워드 상수로 정적배열에 넣기
         final String[] cmdArr = {
                 "작성", "조회", "수정", "삭제", "quit", "종료", "목록"
         };
 
-
-//        String s = " 1번 ";
-//        String b = s.trim();
         Scanner sc = new Scanner(System.in);
 
 //        String[] ar = b.split("");
 //        String[] cmdSplit = sc.next().split("");
-//
-//        System.out.println(ar.length);
-//
-//        if (ar.length < 4) {
-//            System.out.println("여기서만 출력");
-//
-//            System.out.println(ar[0]);
-//            System.out.println(ar[1]);
-//            System.out.println(ar[2]);
 //
 //        } else System.out.println("예외처리");
 
